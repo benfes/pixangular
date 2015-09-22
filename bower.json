@@ -1,0 +1,10 @@
+{
+  "name": "pixangular",
+  "description": "a project for creating pixel art built on angular",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "angular": "~1.4.6"
+  }
+}
