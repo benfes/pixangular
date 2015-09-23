@@ -10,16 +10,16 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     notify = require('gulp-notify');
 
-gulp.task('default', ['clean'], function(){
-    gulp.start('styles','scripts');
-});
+gulp.task('default', ['clean','build']);
 
-gulp.task('clean', function(cb){
-  del(['dist/assets/css','dist/assets/js','dist/assets/img','dist/vendor'],cb);
+gulp.task('build',['scripts','styles']);
+
+gulp.task('clean', function(){
+  del(['dist/assets/css','dist/assets/js','dist/assets/img','dist/vendor']);
 });
 
 gulp.task('styles', function(){
-    return sass('src/sass/*.scss',{ style: 'expanded' })
+    return sass('src/scss/*.scss',{ style: 'expanded' })
         .pipe(gulp.dest('dist/assets/css'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
@@ -31,7 +31,7 @@ gulp.task('scripts', function(){
   return gulp.src('src/js/**/*.js')
   .pipe(jshint('.jshintrc'))
   .pipe(jshint.reporter('default'))
-  .pipe(concat('ngSavings.js'))
+  .pipe(concat('pixangular.js'))
   .pipe(gulp.dest('dist/assets/js'))
   .pipe(rename({suffix: '.min'}))
   .pipe(uglify())
@@ -41,6 +41,7 @@ gulp.task('scripts', function(){
 
 gulp.task('watch', function(){
   gulp.watch('src/js/**/*.js',['scripts']);
+  gulp.watch('src/scss/**/*.scss',['styles']);
   livereload.listen();
   gulp.watch(['dist/**']).on('change', livereload.changed);
 });
