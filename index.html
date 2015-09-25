@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="pixApp">
 <head>
   <meta charset="UTF-8">
   <title>pixangular</title>
-  <link rel="stylesheet" href="assets/css/pixangular.min.css">
+  <link rel="stylesheet" href="dist/assets/css/pixangular.min.css">
 </head>
-<body>
+<body ng-controller="pixCtrl as pixc">
+  <div pixangular grid="pixc.grid" editor width="500px" height="500px">
+  </div>
   <script src="dist/vendor/angular/angular.min.js"></script>
-  <script src="dist/assets/js/pixangular.min.js"></script>
+  <script src="dist/assets/js/pixangular.js"></script>
+  <script src="dist/assets/sample.js"></script>
 </body>
 </html>

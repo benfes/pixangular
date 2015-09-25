@@ -12,10 +12,10 @@ var gulp = require('gulp'),
 
 gulp.task('default', ['clean','build']);
 
-gulp.task('build',['scripts','styles']);
+gulp.task('build',['scripts','styles','views']);
 
 gulp.task('clean', function(){
-  del(['dist/assets/css','dist/assets/js','dist/assets/img','dist/vendor']);
+  del(['dist/assets/css','dist/assets/js','dist/assets/img','dist/assets/views']);
 });
 
 gulp.task('styles', function(){
@@ -39,9 +39,16 @@ gulp.task('scripts', function(){
   .pipe(notify({message: 'Scripts task complete'}));
 });
 
+gulp.task('views', function(){
+  return gulp.src('src/views/**/*.html')
+  .pipe(gulp.dest('dist/assets/views'))
+  .pipe(notify({message: 'Views task complete'}));
+});
+
 gulp.task('watch', function(){
   gulp.watch('src/js/**/*.js',['scripts']);
   gulp.watch('src/scss/**/*.scss',['styles']);
+  gulp.watch('src/views/**/*.html',['views']);
   livereload.listen();
   gulp.watch(['dist/**']).on('change', livereload.changed);
 });

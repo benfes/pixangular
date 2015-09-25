@@ -1,0 +1,9 @@
+<div class="pixangular-grid" style="width: {{vm.width}}; height: {{vm.height}}">
+  <div ng-repeat="row in vm.grid track by $index" class="pixangular-row">
+    <div ng-repeat="column in row track by $index" class="pixangular-cell" ng-style="myStyle" ng-click="column = vm.currentColor" ng-mousedown="vm.dragging = true" ng-mouseup="vm.dragging = false;" ng-mousemove="column = vm.colorIn(column)" style="background-color:{{column}}">
+    </div>
+  </div>
+</div>
+<div class="pixangular-editor">
+  <input type="color" ng-model="vm.currentColor">
+</div>
