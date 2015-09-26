@@ -2,13 +2,15 @@
 
 angular.module('pixangular')
   .directive('pixangularCell', pixangularCell);
-pixangularCell.$inject = ['$parse']
+pixangularCell.$inject = ['$parse'];
 function pixangularCell($parse){
   var directive = {
     restrict: 'EA',
     link: link,
     scope: {
       ngModel: '=',
+      row: '=',
+      column: '=',
       forecolor: '=',
       backcolor: '=',
       showgrid: '='
@@ -33,7 +35,6 @@ function pixangularCell($parse){
       setForeColor();
     });
     element.on('mouseenter', function(event){
-      // console.log(scope.ngModel, event.buttons, buttons.left);
       switch(event.buttons){
         case buttons.left:
           setForeColor();
@@ -45,13 +46,24 @@ function pixangularCell($parse){
           break;
       }
     });
+    scope.safeApply = function(fn) {
+      var phase = this.$root.$$phase;
+      if(phase == '$apply' || phase == '$digest') {
+        if(fn && (typeof(fn) === 'function')) {
+          fn();
+        }
+      } else {
+        this.$apply(fn);
+      }
+    };
     function setForeColor(){
-      console.log(scope.ngModel, scope.forecolor);
-      scope.ngModel = scope.forecolor;
+      scope.safeApply(function(){
+        scope.ngModel[scope.row][scope.column] = scope.forecolor;
+      });
       element.css('background-color',scope.forecolor);
     }
     function setBackColor(){
-      scope.ngModel = scope.backcolor;
+      scope.ngModel[scope.row][scope.column] = scope.backcolor;
       element.css('background-color',scope.backcolor);
     }
   }

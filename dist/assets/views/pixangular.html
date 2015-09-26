@@ -4,10 +4,13 @@
       pixangular-cell
       ng-repeat="column in row track by $index"
       class="pixangular-cell showgrid"
-      ng-model="column"
+      ng-model="vm.grid"
+      row="$parent.$index"
+      column="$index"
       forecolor="vm.forecolor"
       backcolor="vm.backcolor"
       ng-class="{'showgrid': vm.showGrid}"
+    >
     </div>
   </div>
 </div>
@@ -20,7 +23,7 @@
     <label for="showGrid">Show Grid Lines</label>
     <input type="checkbox" name="showGrid" ng-model="vm.showGrid">
   </div>
-  <div class="pixangular-console" ng-bind="vm.grid">
-
+  <div class="pixangular-console">
+    {{vm.grid}}
   </div>
 </div>

@@ -22,14 +22,7 @@ function pixangular(){
   /////////////////////////////////////////////////////
 
   function link(scope, element, attrs){
-    scope.name = "ben";
-    console.log(element.find('.pixangular-cell'));
-    element.find('.pixangular-cell').on('click', function(){
-      console.log('I was clicked');
-    });
-    element.find('.pixangular-cell').on('mouseenter',function(){
-      console.log('your on me');
-    });
+
   }
 }
 
