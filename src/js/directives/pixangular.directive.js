@@ -22,21 +22,36 @@ function pixangular(){
   /////////////////////////////////////////////////////
 
   function link(scope, element, attrs){
-
+    scope.name = "ben";
+    console.log(element.find('.pixangular-cell'));
+    element.find('.pixangular-cell').on('click', function(){
+      console.log('I was clicked');
+    });
+    element.find('.pixangular-cell').on('mouseenter',function(){
+      console.log('your on me');
+    });
   }
 }
 
 function pixangularController(){
   /*jshint validthis:true */
   var vm = this;
-  vm.currentColor = "#000000";
+  vm.forecolor = "#000000";
+  vm.backcolor = "#FFFFFF";
   vm.colorIn = colorIn;
   vm.dragging = false;
+  vm.showGrid = true;
+  vm.output = vm.grid;
+  vm.generateOutput = generateOutput;
 
   function colorIn(cell){
     if(vm.dragging){
       return vm.currentColor;
     }
     return cell;
-  };
+  }
+
+  function generateOutput(){
+    vm.output = vm.grid;
+  }
 }

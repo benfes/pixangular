@@ -1,9 +1,26 @@
 <div class="pixangular-grid" style="width: {{vm.width}}; height: {{vm.height}}">
   <div ng-repeat="row in vm.grid track by $index" class="pixangular-row">
-    <div ng-repeat="column in row track by $index" class="pixangular-cell" ng-style="myStyle" ng-click="column = vm.currentColor" ng-mousedown="vm.dragging = true" ng-mouseup="vm.dragging = false;" ng-mousemove="column = vm.colorIn(column)" style="background-color:{{column}}">
+    <div
+      pixangular-cell
+      ng-repeat="column in row track by $index"
+      class="pixangular-cell showgrid"
+      ng-model="column"
+      forecolor="vm.forecolor"
+      backcolor="vm.backcolor"
+      ng-class="{'showgrid': vm.showGrid}"
     </div>
   </div>
 </div>
 <div class="pixangular-editor">
-  <input type="color" ng-model="vm.currentColor">
+  <div class="pixangular-controls">
+    <label for="forecolor">chosen foreground color</label>
+    <input id="forecolor" type="color" ng-model="vm.forecolor">
+    <label for="backcolor">chosen  background color</label>
+    <input id="backcolor" type="color" ng-model="vm.backcolor">
+    <label for="showGrid">Show Grid Lines</label>
+    <input type="checkbox" name="showGrid" ng-model="vm.showGrid">
+  </div>
+  <div class="pixangular-console" ng-bind="vm.grid">
+
+  </div>
 </div>

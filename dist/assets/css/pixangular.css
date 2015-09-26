@@ -17,5 +17,10 @@
   position: relative;
   display: inline;
   flex-grow: 1;
+}
+.pixangular-grid .pixangular-row .pixangular-cell:hover {
+  opacity: 0.5;
+}
+.pixangular-grid .pixangular-row .pixangular-cell.showgrid {
   border: solid thin #ccc;
 }

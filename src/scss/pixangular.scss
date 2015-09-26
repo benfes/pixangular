@@ -6,8 +6,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  // width: 100px;
-  // height: 100px;
   .pixangular-row{
     position: relative;
     display: flex;
@@ -17,9 +15,12 @@
       position: relative;
       display: inline;
       flex-grow: 1;
-      // width: 20px;
-      // height: 20px;
-      border: solid thin #ccc;
+      &:hover{
+        opacity: 0.5;
+      }
+      &.showgrid{
+        border: solid thin #ccc;
+      }
     }
   }
 }
