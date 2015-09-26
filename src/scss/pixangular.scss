@@ -1,26 +1,60 @@
-.pixangular-grid{
-  &*{
-    padding: 0;
-    margin: 0;
+.pixangular{
+  *{
+    font-family: arial;
+    box-sizing: border-box;
   }
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  .pixangular-row{
+  &.editing{
+    .pixangular-grid{
+      .pixangular-row{
+        .pixangular-cell{
+          cursor: cell;
+          &:hover{
+            opacity: 0.5;
+          }
+          &.showgrid{
+            border: solid thin #ccc;
+          }
+        }
+      }
+    }
+    .pixangular-editor{
+      display: block;
+    }
+  }
+  .pixangular-grid{
+    &*{
+      padding: 0;
+      margin: 0;
+    }
     position: relative;
     display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    .pixangular-cell{
+    flex-direction: column;
+    .pixangular-row{
       position: relative;
-      display: inline;
+      display: flex;
+      flex-direction: row;
       flex-grow: 1;
-      &:hover{
-        opacity: 0.5;
+      .pixangular-cell{
+        position: relative;
+        display: inline;
+        flex-grow: 1;
       }
-      &.showgrid{
-        border: solid thin #ccc;
+    }
+  }
+  .pixangular-editor{
+    display: none;
+    .pixangular-controls{
+      .control-group{
+        margin-bottom: 10px;
       }
+    }
+    .pixangular-console{
+      position: relative;
+      overflow: auto;
+      height: 100px;
+      width: 500px;
+      border: solid thin #ccc;
+      padding: 10px;
     }
   }
 }

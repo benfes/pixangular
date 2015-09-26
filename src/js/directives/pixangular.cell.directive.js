@@ -24,15 +24,24 @@ function pixangularCell($parse){
 
   function link(scope, element, attrs){
     var fn = $parse(attrs.ngRightClick);
+    element.css('background-color',scope.ngModel[scope.row][scope.column]);
     element.bind('contextmenu', function(event) {
         scope.$apply(function() {
             event.preventDefault();
             fn(scope, {$event:event});
-            setBackColor();
+            if(event.ctrlKey){
+              updateBackColor();
+            } else {
+              setBackColor();
+            }
         });
     });
     element.on('click', function(event){
-      setForeColor();
+      if(event.ctrlKey){
+        updateForeColor();
+      } else {
+        setForeColor();
+      }
     });
     element.on('mouseenter', function(event){
       switch(event.buttons){
@@ -65,6 +74,16 @@ function pixangularCell($parse){
     function setBackColor(){
       scope.ngModel[scope.row][scope.column] = scope.backcolor;
       element.css('background-color',scope.backcolor);
+    }
+    function updateForeColor(){
+      scope.safeApply(function(){
+        scope.forecolor = scope.ngModel[scope.row][scope.column];
+      });
+    }
+    function updateBackColor(){
+      scope.safeApply(function(){
+        scope.backcolor = scope.ngModel[scope.row][scope.column];
+      });
     }
   }
 }

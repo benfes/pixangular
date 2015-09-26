@@ -1,26 +1,50 @@
-.pixangular-grid {
+.pixangular * {
+  font-family: arial;
+  box-sizing: border-box;
+}
+.pixangular.editing .pixangular-grid .pixangular-row .pixangular-cell {
+  cursor: cell;
+}
+.pixangular.editing .pixangular-grid .pixangular-row .pixangular-cell:hover {
+  opacity: 0.5;
+}
+.pixangular.editing .pixangular-grid .pixangular-row .pixangular-cell.showgrid {
+  border: solid thin #ccc;
+}
+.pixangular.editing .pixangular-editor {
+  display: block;
+}
+.pixangular .pixangular-grid {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-.pixangular-grid* {
+.pixangular .pixangular-grid* {
   padding: 0;
   margin: 0;
 }
-.pixangular-grid .pixangular-row {
+.pixangular .pixangular-grid .pixangular-row {
   position: relative;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
 }
-.pixangular-grid .pixangular-row .pixangular-cell {
+.pixangular .pixangular-grid .pixangular-row .pixangular-cell {
   position: relative;
   display: inline;
   flex-grow: 1;
 }
-.pixangular-grid .pixangular-row .pixangular-cell:hover {
-  opacity: 0.5;
+.pixangular .pixangular-editor {
+  display: none;
 }
-.pixangular-grid .pixangular-row .pixangular-cell.showgrid {
+.pixangular .pixangular-editor .pixangular-controls .control-group {
+  margin-bottom: 10px;
+}
+.pixangular .pixangular-editor .pixangular-console {
+  position: relative;
+  overflow: auto;
+  height: 100px;
+  width: 500px;
   border: solid thin #ccc;
+  padding: 10px;
 }

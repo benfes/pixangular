@@ -22,7 +22,10 @@ function pixangular(){
   /////////////////////////////////////////////////////
 
   function link(scope, element, attrs){
-
+    element.addClass('pixangular');
+    if(typeof attrs.editor !== 'undefined'){
+      element.addClass('editing');
+    }
   }
 }
 

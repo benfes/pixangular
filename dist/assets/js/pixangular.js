@@ -28,15 +28,24 @@ function pixangularCell($parse){
 
   function link(scope, element, attrs){
     var fn = $parse(attrs.ngRightClick);
+    element.css('background-color',scope.ngModel[scope.row][scope.column]);
     element.bind('contextmenu', function(event) {
         scope.$apply(function() {
             event.preventDefault();
             fn(scope, {$event:event});
-            setBackColor();
+            if(event.ctrlKey){
+              updateBackColor();
+            } else {
+              setBackColor();
+            }
         });
     });
     element.on('click', function(event){
-      setForeColor();
+      if(event.ctrlKey){
+        updateForeColor();
+      } else {
+        setForeColor();
+      }
     });
     element.on('mouseenter', function(event){
       switch(event.buttons){
@@ -70,6 +79,16 @@ function pixangularCell($parse){
       scope.ngModel[scope.row][scope.column] = scope.backcolor;
       element.css('background-color',scope.backcolor);
     }
+    function updateForeColor(){
+      scope.safeApply(function(){
+        scope.forecolor = scope.ngModel[scope.row][scope.column];
+      });
+    }
+    function updateBackColor(){
+      scope.safeApply(function(){
+        scope.backcolor = scope.ngModel[scope.row][scope.column];
+      });
+    }
   }
 }
 
@@ -97,7 +116,10 @@ function pixangular(){
   /////////////////////////////////////////////////////
 
   function link(scope, element, attrs){
-
+    element.addClass('pixangular');
+    if(typeof attrs.editor !== 'undefined'){
+      element.addClass('editing');
+    }
   }
 }
 
@@ -121,5 +143,29 @@ function pixangularController(){
 
   function generateOutput(){
     vm.output = vm.grid;
+  }
+}
+
+angular.module('pixangular')
+  .factory('pixangularGenerator',pixangularGenerator);
+
+function pixangularGenerator(){
+  var factory = {
+    generateGrid: generateGrid
+  };
+  return factory;
+
+  ////////////////
+
+  function generateGrid(rows, columns, baseColor){
+    var grid = [];
+    for(var row = 0; row < rows; row++){
+      var currentRow = [];
+      for(var column = 0; column < columns; column++){
+        currentRow.push(baseColor);
+      }
+      grid.push(currentRow);
+    }
+    return grid;
   }
 }
