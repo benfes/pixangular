@@ -6,6 +6,7 @@
   "dependencies": {},
   "devDependencies": {
     "angular": "~1.4.6",
-    "jasmine": "~2.3.4"
+    "jasmine": "~2.3.4",
+    "angular-mocks": "~1.4.6"
   }
 }
